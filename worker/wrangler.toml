@@ -1,0 +1,8 @@
+name = "gptperfil"
+compatibility_date = "2023-05-18"
+node_compat = true
+workers_dev = true
+main = "src/index.js"
+[vars]
+# openAI key
+openai_key = "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"

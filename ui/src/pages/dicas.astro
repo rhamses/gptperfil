@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/default.astro";
+import Loader from "./loader.astro";
+const categoria = "Filme";
+---
+
+<script type="module">
+  function loadData(body) {
+    document.querySelector("#loader").style.display = "none";
+    document.querySelector("#answer").innerHTML = body.resposta;
+    for (const dica of body.dicas) {
+      if (dica) {
+        const li = document.createElement("li");
+        li.classList.add("p-2", "odd:bg-slate-200");
+        li.innerHTML = dica;
+        document.querySelector("#dicasList").appendChild(li);
+      }
+    }
+  }
+  if (new URLSearchParams(location.search).get("category")) {
+    const category = new URLSearchParams(location.search).get("category");
+    document.querySelector("#category").innerHTML = category;
+    fetch("https://gptperfil.amb1.workers.dev", {
+      method: "Post",
+      body: JSON.stringify({
+        categoria: category,
+        dicas: 20,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => loadData(res))
+      .catch((err) => alert(err));
+  }
+</script>
+
+<Layout>
+  <Loader />
+  <section id="dicas">
+    <header>
+      <h1 class="text-4xl font-bold">
+        Categoria - <span id="category"></span>
+      </h1>
+    </header>
+    <div class="flex my-5 items-center">
+      <small class="bg-green-300 p-2 rounded mr-2 w-full">
+        <span class="font-bold">Resposta:</span>
+        <span id="answer"></span>
+      </small>
+      <button
+        class="cursor-pointer"
+        id="reset"
+        title="Gerar uma nova carta nessa categoria"
+      >
+        <img
+          class="h-5"
+          src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9IkxheWVyXzEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEyOCAxMjg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48Zz48cGF0aCBkPSJNOTYuMSwxMDMuNmMtMTAuNCw4LjQtMjMuNSwxMi40LTM2LjgsMTEuMWMtMTAuNS0xLTIwLjMtNS4xLTI4LjItMTEuOEg0NHYtOEgxOHYyNmg4di0xMS45YzkuMSw3LjcsMjAuNCwxMi41LDMyLjYsMTMuNiAgIGMxLjksMC4yLDMuNywwLjMsNS41LDAuM2MxMy41LDAsMjYuNS00LjYsMzctMTMuMmMxOS4xLTE1LjQsMjYuNi00MC41LDE5LjEtNjMuOWwtNy42LDIuNEMxMTksNjguNiwxMTIuNiw5MC4zLDk2LjEsMTAzLjZ6Ii8+PHBhdGggZD0iTTEwMywxOS43Yy0yMS4yLTE4LjctNTMuNS0yMC03Ni4xLTEuNkM3LjksMzMuNSwwLjQsNTguNCw3LjcsODEuN2w3LjYtMi40QzksNTkuMiwxNS41LDM3LjYsMzEuOSwyNC40ICAgQzUxLjYsOC40LDc5LjcsOS42LDk4LDI2SDg1djhoMjZWOGgtOFYxOS43eiIvPjwvZz48L3N2Zz4="
+          alt=""
+        />
+      </button>
+    </div>
+  </section>
+  <h2 class="my-5">Fale as dicas abaixo</h2>
+  <ol id="dicasList" class="text-left"></ol>
+</Layout>

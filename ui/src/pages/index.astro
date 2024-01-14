@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/default.astro";
+import Dicas from "../components/dica.astro";
+const categories = [
+  {
+    title: "Pessoa",
+    description: "pessoa viva, morta ou personagem",
+  },
+  {
+    title: "Ano",
+    description: "real ou não.",
+  },
+  {
+    title: "Lugar",
+    description: "físico ou não",
+  },
+  {
+    title: "Coisa",
+    description: "objeto sei lá",
+  },
+];
+---
+
+<Layout>
+  <section id="home">
+    <header>
+      <h1 class="text-4xl font-bold">Dicas Perfil</h1>
+      <p>Para jogar sem nunca acabar as perguntas</p>
+      <small>powered by OpenAI</small>
+    </header>
+    <section class="my-5">
+      <h2 class="text-lg px-10">Selecione uma categoria abaixo para começar</h2>
+      {
+        categories.map((category) => (
+          <Dicas title={category.title}>{category.description}</Dicas>
+        ))
+      }
+    </section>
+  </section>
+</Layout>

@@ -1,0 +1,21 @@
+{
+  "name": "gpt-perfil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "openai": "^4.24.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "miniflare": "^3.20231218.1",
+    "wrangler": "^3.13.1"
+  }
+}
