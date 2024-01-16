@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "up": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^8.1.0",

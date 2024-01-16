@@ -5,4 +5,4 @@ workers_dev = true
 main = "src/index.js"
 [vars]
 # openAI key
-openai_key = "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"
+openai_key = ""

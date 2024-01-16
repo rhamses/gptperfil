@@ -40,6 +40,7 @@ export default {
       console.log(error);
       const body = {
         success: false,
+        data: JSON.stringify(error),
       };
       return new Response(JSON.stringify(body), {
         headers,
